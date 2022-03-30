@@ -1,12 +1,18 @@
 <template>
-  <header>
-    <img src="@/assets/img/logo.png" alt="spotify logo" />
-  </header>
+  <main>
+    <Albums />
+  </main>
 </template>
 
 <script>
+import Albums from "./Albums.vue";
 export default {
-  name: "IndexHeader",
+  name: "IndexMain",
+  
+  components: {
+    Albums,
+    
+  }
 };
 </script>
 
@@ -14,11 +20,5 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/scss/partials/_variables";
 
-header {
-  height: 50px;
-  background-color: $bgLightDark;
-  img {
-    height: 100%;
-  }
-}
+
 </style>

@@ -1,0 +1,51 @@
+<template>
+  <div class="container p-5">
+    <div class="row px-5 flex-wrap">
+      <div v-for="(album, index) in albumsList" :key="index" class="col d-flex flex-shrink-1 m-2">
+        <SingleAlbum 
+        :imgUrl="album.poster"
+        :title="album.title"
+        :author="album.author"
+        :year="album.year"/>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import SingleAlbum from "./SingleAlbum.vue";
+export default {
+  name: "MainAlbums",
+  components: {
+    SingleAlbum,
+  },
+  data: function () {
+    return {
+      albumsList: null,
+      errors: null,
+    };
+  },
+  methods: {
+    getAlbumsApi() {
+      axios
+        .get(`https://flynn.boolean.careers/exercises/api/array/music`)
+        .then((response) => {
+          this.albumsList = response.data.response;
+          console.log(this.albumsList);
+        })
+        .catch((e) => {
+          this.errors.push(e);
+        });
+    },
+  },
+  created(){
+    this.getAlbumsApi();
+  }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+@import "@/assets/scss/partials/_variables";
+</style>
