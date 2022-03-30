@@ -1,13 +1,25 @@
 <template>
-  <div class="container p-5">
-    <div class="row px-5 flex-wrap">
-      <div v-for="(album, index) in albumsList" :key="index" class="col d-flex flex-shrink-1 m-2">
-        <SingleAlbum 
-        :imgUrl="album.poster"
-        :title="album.title"
-        :author="album.author"
-        :year="album.year"/>
+  <div>
+    <div v-if="(albumsList)" class="container p-5">
+      <div class="row px-5 flex-wrap">
+        <div
+          v-for="(album, index) in albumsList"
+          :key="index"
+          class="col d-flex flex-shrink-1 m-2"
+        >
+          <SingleAlbum
+            :imgUrl="album.poster"
+            :title="album.title"
+            :author="album.author"
+            :year="album.year"
+          />
+        </div>
       </div>
+    </div>
+
+    <div v-else>
+      <Loader />
+      ciao
     </div>
   </div>
 </template>
@@ -15,10 +27,12 @@
 <script>
 import axios from "axios";
 import SingleAlbum from "./SingleAlbum.vue";
+import Loader from "./Loader.vue";
 export default {
   name: "MainAlbums",
   components: {
     SingleAlbum,
+    Loader,
   },
   data: function () {
     return {
@@ -39,9 +53,9 @@ export default {
         });
     },
   },
-  created(){
-    this.getAlbumsApi();
-  }
+  created() {
+    setTimeout(this.getAlbumsApi, 3000);
+  },
 };
 </script>
 
