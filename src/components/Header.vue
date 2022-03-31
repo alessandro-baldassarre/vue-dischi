@@ -7,7 +7,7 @@
         </div>
         <div class="select-bar px-5">
           <select v-model="option" name="select-album" id="select-album">
-            <option selected>Scegli Genere</option>
+            <option value="" disabled selected hidden>Scegli Genere</option>
             <option
               v-for="(element, index) in genereList"
               :key="index"
