@@ -1,7 +1,22 @@
 <template>
   <div>
     <div v-if="albumsList" class="container p-5">
-      <div class="row px-5 flex-wrap">
+      <div v-if="(option != '')" class="row px-5 flex-wrap">
+        <div
+          v-for="(album, index) in generetedArrayFinded"
+          :key="index"
+          class="col d-flex flex-shrink-1 m-2"
+        >
+          <SingleAlbum
+            :imgUrl="album.poster"
+            :title="album.title"
+            :author="album.author"
+            :year="album.year"
+          />
+        </div>
+        
+      </div>
+       <div v-else class="row px-5 flex-wrap">
         <div
           v-for="(album, index) in albumsList"
           :key="index"
@@ -14,12 +29,12 @@
             :year="album.year"
           />
         </div>
+        
       </div>
     </div>
 
     <div v-else>
       <Loader />
-      ciao
     </div>
   </div>
 </template>
@@ -41,12 +56,16 @@ export default {
       genereList: [],
     };
   },
+  props: {
+    option: String,
+    generetedArrayFinded: Array,
+  },
   methods: {
     getAlbumsApi() {
       axios
         .get(`https://flynn.boolean.careers/exercises/api/array/music`)
         .then((response) => {
-          this.albumsList = response.data.response;      
+          this.albumsList = response.data.response;   
           this.sendGenereList();
         })
         .catch((e) => {
@@ -62,7 +81,7 @@ export default {
         }
         
       });
-      this.$emit('sendGenereList',this.genereList);     
+      this.$emit('sendGenereList',this.genereList, this.albumsList);     
     },
   },
   created() {

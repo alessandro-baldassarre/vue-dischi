@@ -6,12 +6,13 @@
           <img src="@/assets/img/logo.png" alt="spotify logo" />
         </div>
         <div class="select-bar px-5">
-          <select name="select-album" id="select-album">
+          <select v-model="option" name="select-album" id="select-album">
             <option selected>Scegli Genere</option>
             <option
               v-for="(element, index) in genereList"
               :key="index"
-              :value="element.genre"
+              :value="element"
+              @click="sendOption"
             >
               {{ element }}
             </option>
@@ -25,9 +26,28 @@
 <script>
 export default {
   name: "IndexHeader",
-
+  data: function () {
+    return {
+      option: "",
+      genereArrayFinded: [],
+    };
+  },
   props: {
     genereList: Array,
+    albumList: Array,
+  },
+  methods: {
+    sendOption() {
+      this.genereArrayFinded= [],
+       this.albumList.forEach(element => {
+        if(element.genre == this.option){
+            this.genereArrayFinded.push(element);
+        }
+        
+      });
+      console.log(this.option);
+      this.$emit("sendOption", this.option, this.genereArrayFinded);
+    },
   },
 };
 </script>

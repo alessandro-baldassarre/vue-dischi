@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Header :genereList = "genreList"/>
+    <Header :genereList = "genreList" :albumList="albumsListFind"  @sendOption="sendOption" />
 
-    <Main @sendGenereList="createGenreList"/>
+    <Main @sendGenereList="createGenreList" :option="option" :generetedArrayFinded="generetedArrayFinded"/>
   </div>
 </template>
 
@@ -19,11 +19,19 @@ export default {
   data: function () {
     return {
       genreList: null,
+      albumsListFind: null,
+      option: "",
+      generetedArrayFinded : [],
     };
   },
   methods: {
-    createGenreList(genreList) {
+    createGenreList(genreList, albumsList) {
       this.genreList = genreList;
+      this.albumsListFind = albumsList;
+    },
+    sendOption(option, array) {
+      this.option = option;
+      this.generetedArrayFinded = array;
     },
   },
 };

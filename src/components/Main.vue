@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Albums @sendGenereList="createGenreList" />
+    <Albums @sendGenereList="createGenreList" :option="option" :generetedArrayFinded="generetedArrayFinded"/>
   </main>
 </template>
 
@@ -17,10 +17,14 @@ export default {
       genreList: null,
     };
   },
+  props: {
+    option: String,
+    generetedArrayFinded: Array,
+  },
   methods: {
-    createGenreList(genreList) {
+    createGenreList(genreList, albumsList) {
       this.genreList = genreList;
-      this.$emit('sendGenereList',this.genreList);  
+      this.$emit('sendGenereList',this.genreList, albumsList);  
     },
   },
 };
