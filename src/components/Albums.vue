@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-if="albumsList" class="container p-5">
-      <div v-if="(option != '')" class="row px-5 flex-wrap">
+    <div v-if="albumsList" class="container-fluid p-5">
+      <div v-if="(option != '')" class="row px-5 gy-3 p-5">
         <div
           v-for="(album, index) in generetedArrayFinded"
           :key="index"
-          class="col d-flex flex-shrink-1 m-2"
+          class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex flex-shrink-1 justify-content-center"
         >
           <SingleAlbum
             :imgUrl="album.poster"
@@ -16,11 +16,11 @@
         </div>
         
       </div>
-       <div v-else class="row px-5 flex-wrap">
+       <div v-else class="row px-5 gy-3 flex-wrap p-5">
         <div
           v-for="(album, index) in albumsList"
           :key="index"
-          class="col d-flex flex-shrink-1 m-2"
+          class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex flex-shrink-1 justify-content-center"
         >
           <SingleAlbum
             :imgUrl="album.poster"

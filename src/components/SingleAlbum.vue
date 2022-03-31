@@ -1,5 +1,5 @@
 <template>
-  <div class="single-album p-4 rounded text-center">
+  <div class="single-album rounded text-center p-3">
     <img
       :src="imgUrl"
       class="img-fluid"
@@ -36,12 +36,7 @@ export default {
 @import "@/assets/scss/partials/_variables";
 
 div.single-album {
-  width: 180px;
   background-color: $bgLightDark;
-  img{
-    width: 170px;
-    height: 140px;
-  }
   h5{
     font-size: .7rem;
   }
