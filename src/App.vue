@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Header />
+    <Header :genereList = "genreList"/>
 
-    <Main />
+    <Main @sendGenereList="createGenreList"/>
   </div>
 </template>
 
@@ -15,6 +15,16 @@ export default {
   components: {
     Header,
     Main,
+  },
+  data: function () {
+    return {
+      genreList: null,
+    };
+  },
+  methods: {
+    createGenreList(genreList) {
+      this.genreList = genreList;
+    },
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="(albumsList)" class="container p-5">
+    <div v-if="albumsList" class="container p-5">
       <div class="row px-5 flex-wrap">
         <div
           v-for="(album, index) in albumsList"
@@ -38,6 +38,7 @@ export default {
     return {
       albumsList: null,
       errors: null,
+      genereList: [],
     };
   },
   methods: {
@@ -45,12 +46,23 @@ export default {
       axios
         .get(`https://flynn.boolean.careers/exercises/api/array/music`)
         .then((response) => {
-          this.albumsList = response.data.response;
-          console.log(this.albumsList);
+          this.albumsList = response.data.response;      
+          this.sendGenereList();
         })
         .catch((e) => {
           this.errors.push(e);
         });
+  
+     
+    },
+    sendGenereList() {
+      this.albumsList.forEach(element => {
+        if(!this.genereList.includes(element.genre)){
+            this.genereList.push(element.genre);
+        }
+        
+      });
+      this.$emit('sendGenereList',this.genereList);     
     },
   },
   created() {
