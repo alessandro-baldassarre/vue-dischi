@@ -12,7 +12,7 @@
               v-for="(element, index) in genereList"
               :key="index"
               :value="element"
-              @click="sendOption"
+              @change="sendOption"
             >
               {{ element }}
             </option>
